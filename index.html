@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .red {
+        background-color: lightcoral;
+      }
+
+      .green {
+        background-color: lightgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Calculadora</h1>
+    <br />
+
+    <input type="text" name="result" id="result" />
+    <div id="calculadora">
+      <table>
+        <tr>
+          <td><button>1</button></td>
+          <td><button>2</button></td>
+          <td><button>3</button></td>
+          <td><button>+</button></td>
+        </tr>
+        <tr>
+          <td><button>4</button></td>
+          <td><button>5</button></td>
+          <td><button>6</button></td>
+          <td><button>-</button></td>
+        </tr>
+        <tr>
+          <td><button>7</button></td>
+          <td><button>8</button></td>
+          <td><button>9</button></td>
+          <td><button>=</button></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><button>0</button></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+
+    <script>
+      let calc = document.getElementById("calculadora");
+      let num1 = undefined;
+      let num2 = undefined;
+      let op = undefined;
+      let res = undefined;
+      let afet_equal = false;
+
+      calc.addEventListener("click", (event) => {
+        let key = event.target.innerHTML;
+        if (key == "+") {
+          op = key;
+          num1 = document.getElementById("result").value;
+          document.getElementById("result").value = "";
+        } else if (key == "-") {
+          op = key;
+          num1 = document.getElementById("result").value;
+          document.getElementById("result").value = "";
+        } else if (key == "=") {
+          num2 = document.getElementById("result").value;
+          if (num1 !== undefined && num2 !== undefined) {
+            num1 = parseInt(num1);
+            num2 = parseInt(num2);
+            if (op == "+") res = num1 + num2;
+            else if (op == "-") res = num1 - num2;
+            document.getElementById("result").value = res;
+            afet_equal = true;
+            // console.log(num1 + op + num2 + key + res);
+            op = undefined;
+            num1 = undefined;
+            num2 = undefined;
+            res = undefined;
+          } else {
+            document.getElementById("result").value = "";
+            op = undefined;
+            num1 = undefined;
+            num2 = undefined;
+            res = undefined;
+          }
+        } else {
+          if (afet_equal) {
+            afet_equal = false;
+            document.getElementById("result").value = "";
+          }
+          document.getElementById("result").value += key;
+        }
+      });
+    </script>
+  </body>
+</html>
